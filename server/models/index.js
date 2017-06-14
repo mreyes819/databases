@@ -16,20 +16,20 @@ module.exports = {
       //                      ORDER BY users.name \
       //                      ';
 
-      db.query(querymessages, function(err, results){
+      db.query(querymessages, function(err, results) {
         if (err) { throw err; }
         callback(results);
       });
     },
 
-    post: function (parameters, callback) { // Create a message
+    post: function (parameter, callback) { // Create a message
       var insertMessage = 'INSERT INTO messages (txt, userID, roomID) \
                            VALUES (\
                              ?, \
                              (SELECT id FROM users WHERE name = ? LIMIT 1), \
                              (SELECT id FROM rooms WHERE name = ? LIMIT 1)  \
-                           )'
-      db.query(insertUser, parameter, function(err, results){
+                           );';
+      db.query(insertUser, parameter, function(err, results) {
         if (err) { throw err; }
         callback(results);
       });
@@ -38,16 +38,16 @@ module.exports = {
 
   users: {
     get: function (callback) { // Fetch all users
-      var queryUsers = 'SELECT * FROM users'
-      db.query(queryUsers, function(err, results){
+      var queryUsers = 'SELECT * FROM users;';
+      db.query(queryUsers, function(err, results) {
         if (err) { throw err; }
         callback(results);
       });
     },
 
     post: function (parameter, callback) { // Create a user
-      var insertUser = 'INSERT INTO users(name) VALUES (?)'
-      db.query(insertUser, parameter, function(err, results){
+      var insertUser = 'INSERT INTO users(name) VALUES (?);';
+      db.query(insertUser, parameter, function(err, results) {
         if (err) { throw err; }
         callback(results);
       });
